@@ -1,0 +1,20 @@
+@startuml
+skinparam backgroundColor #FFFFFF
+skinparam linetype ortho
+
+rectangle "任務管理服務" as Service
+rectangle "開始執行任務" as StartTask
+rectangle "獲取任務腳本" as FetchScript
+rectangle "資源池分配線程執行任務" as AllocateThread
+rectangle "redis 存儲執行中的任務" as RedisStore
+rectangle "啟動線程持續監控狀態" as MonitorThread
+rectangle "存儲執行結果" as StoreResult
+
+StartTask -down-> FetchScript
+FetchScript -right-> Service : 查詢API
+FetchScript -down-> AllocateThread
+AllocateThread -down-> StoreResult
+AllocateThread -right-> RedisStore : redis調用
+MonitorThread -left-> RedisStore : redis調用
+MonitorThread -down-> StoreResult
+@enduml
