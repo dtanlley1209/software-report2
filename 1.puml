@@ -1,0 +1,25 @@
+@startuml
+class Car {
+}
+
+class Wheel {
+   
+}
+
+class Engine {
+    
+}
+
+class Oil {
+   
+}
+
+class Volvo
+class Toyota
+
+Volvo --|> Car
+Toyota --|> Car
+Car *-- Wheel : "n:1"
+Car *-- Engine : "n:1"
+Engine <-- Oil
+@enduml
